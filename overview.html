@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jun Hong & Qiu Yi — 5 Jul 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#b8986a;--gold-light:#d4b896;--gold-pale:#f5ede0;
+  --dark:#1a1510;--mid:#3d3020;--text:#2c2416;--muted:#8a7a65;
+  --bg:#faf7f2;--white:#fff;--border:#e8ddd0;
+  --bride-bg:#fef4f6;  --bride-c:#c47a8a;
+  --groom-bg:#f2f5fc;  --groom-c:#6a8fb5;
+  --gold-bg:#f5ede0;   --gold-c:#b8986a;
+  --teal-bg:#f2f8f7;   --teal-c:#5a9ea0;
+  --sage-bg:#f5f7f2;   --sage-c:#7a9e7e;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);}
+
+/* ── HEADER ── */
+.hdr{background:var(--dark);padding:16px 28px 14px;text-align:center;position:relative;overflow:hidden;}
+.hdr::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(184,152,106,.18),transparent 70%);}
+.hdr-orn{position:relative;font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;opacity:.8;margin-bottom:3px;}
+.hdr h1{position:relative;font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3.5vw,36px);font-weight:300;color:#fff;letter-spacing:1px;}
+.hdr h1 em{font-style:italic;color:var(--gold-light);}
+.hdr-sub{position:relative;font-size:11px;color:var(--gold-light);letter-spacing:3px;text-transform:uppercase;margin-top:3px;font-weight:300;}
+
+/* ── PHASE WRAPPER ── */
+.phase{max-width:1080px;margin:0 auto;padding:0 20px 48px;}
+.phase-hd{padding:28px 0 8px;margin-bottom:4px;}
+.phase-num{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:500;}
+.phase-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--dark);margin:2px 0;}
+.phase-sub{font-size:11.5px;color:var(--muted);line-height:1.5;}
+.phase-divider{height:2px;background:linear-gradient(to right,var(--dark),transparent);margin-bottom:14px;}
+
+/* ── TIMELINE TABLE — time-scaled, flush rows ── */
+.trow{display:flex;align-items:stretch;border-bottom:1px solid var(--border);}
+.trow:last-child{border-bottom:none;}
+
+.tt{flex-shrink:0;width:52px;padding:7px 8px 4px 0;text-align:right;
+  font-size:11.5px;font-weight:600;color:var(--muted);letter-spacing:.3px;
+  border-right:2px solid var(--border);background:var(--bg);}
+
+/* inner grid — columns set via inline style per phase */
+.tinner{flex:1;display:grid;gap:0;padding:0;align-items:stretch;}
+.tinner > div{border-left:1px solid var(--border);}
+.tinner > .span-all{border-left:none;}
+
+/* COLUMN HEADER ROW */
+.col-header-row{display:flex;align-items:stretch;margin-bottom:0;border-bottom:2px solid var(--border);}
+.ch-spacer{flex-shrink:0;width:52px;border-right:2px solid var(--border);background:var(--bg);}
+.ch-grid{flex:1;display:grid;gap:0;}
+.ch{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1px;
+  padding:6px 10px;border-radius:0;text-align:center;line-height:1.3;
+  border-left:1px solid var(--border);}
+.ch:first-child{border-left:none;}
+.ch.bride{background:var(--bride-bg);color:var(--bride-c);}
+.ch.groom{background:var(--groom-bg);color:var(--groom-c);}
+.ch.couple{background:var(--gold-bg);color:var(--gold-c);}
+.ch.bm{background:#fef8f9;color:#c08090;}
+.ch.gm{background:#f5f7fd;color:#7a9ab8;}
+.ch.vendor{background:var(--teal-bg);color:var(--teal-c);}
+.ch.prog{background:var(--sage-bg);color:var(--sage-c);}
+
+/* ── CARDS — flat table cells ── */
+.card{border-radius:0;border:none;padding:7px 11px 8px 13px;position:relative;overflow:hidden;box-sizing:border-box;transition:filter .12s;}
+.card:hover{filter:brightness(.97);}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;}
+.card.bride{background:var(--bride-bg);}.card.bride::before{background:var(--bride-c);}
+.card.groom{background:var(--groom-bg);}.card.groom::before{background:var(--groom-c);}
+.card.couple,.card.joint{background:var(--gold-bg);}.card.couple::before,.card.joint::before{background:var(--gold-c);}
+.card.bm{background:#fef8f9;}.card.bm::before{background:#c49098;}
+.card.gm{background:#f5f7fd;}.card.gm::before{background:#7a9ec8;}
+.card.vendor{background:var(--teal-bg);}.card.vendor::before{background:var(--teal-c);}
+.card.prog{background:var(--sage-bg);}.card.prog::before{background:var(--sage-c);}
+
+.c-badge{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px;}
+.c-title{font-size:13px;font-weight:500;color:var(--dark);line-height:1.3;margin-bottom:4px;}
+.c-info{display:flex;flex-wrap:wrap;gap:2px 10px;}
+.c-info span{font-size:11px;color:var(--muted);}
+.c-who{font-size:10.5px;color:var(--mid);margin-top:3px;}
+.c-vendor{font-size:11px;color:#8a6020;font-weight:500;margin-top:3px;}
+.c-pic{font-size:10.5px;color:var(--muted);margin-top:2px;}
+.c-note{font-size:10.5px;color:var(--muted);font-style:italic;margin-top:4px;
+  padding-top:4px;border-top:1px dashed var(--border);}
+
+/* span all cols inside inner grid */
+.span-all{grid-column:1/-1;}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-orn">Wedding Day · Sunday 5 July 2026</div>
+  <h1>Jun Hong <em>&</em> Qiu Yi</h1>
+  <div class="hdr-sub">St Regis Singapore</div>
+</div>
+
+<div id="root"></div>
+
+<script>
+const DATA = [{"date": "2026-07-04", "start": "12:00", "end": "13:00", "venue": "Woodlands", "type": "prep", "group": "groom,groomsman", "agenda": "collect flowers & install on bridal car", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-04", "start": "13:30", "end": "14:00", "venue": "CCK", "type": "prep", "group": "groom,groomsman", "agenda": "pass flower wrist corsages to CCK", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-04", "start": "14:00", "end": "14:30", "venue": "CCK", "type": "prep", "group": "groom,groomsman", "agenda": "load items into bridal car or/and mazda", "logistics": "Personal\n1. Suits + tie/bowtie + shoe + socks\n2. Underwear, pyjamas and Casual Clothes (2 Days)\n3. Hair Wax\n4. Shaver\n5. Facial Cleanser\n6. Orange (check how many)\n7. Angbao\n8. 2nd and 3rd gown\n\nReception/foyer\n1. Guest book & angbao box (check with Michelle)\n2. Victoria wedding photos (to check with vendor)\n3. Table Seating Arrangement A3 Size - 6 Copies\n4. Taiwan photos\n\nTea Ceremony\n1. Tea Ceremony Decorations\n (To check with Michelle if can set this up the day before for tea ceremony)\n\nSolemnization\n1. Wedding band\n2. Solemnisation Certificate (need to print)\n\nBanquet\n1. bingo card\n2. bubble gun", "notes": "total 2 drivers for Mazda + bridal car", "vendor": "", "vendor_contact": "", "pic1": "groomsman_wayne", "pic2": ""}, {"date": "2026-07-04", "start": "14:00", "end": "14:30", "venue": "CCK", "type": "prep", "group": "bride", "agenda": "double check items to be left at CCK", "logistics": "1. Red Umbrella\n2. Fan\n3. Hyundai", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_wayne", "pic2": ""}, {"date": "2026-07-04", "start": "14:30", "end": "18:00", "venue": "CCK", "type": "admin", "group": "bride", "agenda": "call vendors to make sure they are coming", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-04", "start": "15:00", "end": "15:30", "venue": "St Regis - room A", "type": "check-in", "group": "groom,groomsman", "agenda": "Hotel Check-in & Settle Down", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-04", "start": "15:00", "end": "15:30", "venue": "St Regis - room B", "type": "check-in", "group": "groom_family", "agenda": "Hotel Check-in & Settle Down", "logistics": "", "notes": "maybe book grab for transport", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "02:30", "end": "03:00", "venue": "CCK", "type": "makeup", "group": "bride", "agenda": "wake up & wash hair", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "03:00", "end": "06:00", "venue": "CCK", "type": "makeup", "group": "bride", "agenda": "bridal makeup", "logistics": "", "notes": "check if can start earlier", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "04:30", "end": "04:45", "venue": "CCK", "type": "makeup", "group": "bride_mummy", "agenda": "mummy yap to wake up", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "04:45", "end": "05:45", "venue": "CCK", "type": "makeup", "group": "bride_mummy", "agenda": "mummy yap makeup", "logistics": "", "notes": "$300 balance payment", "vendor": "Ann Chong", "vendor_contact": "87176134", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "04:00", "end": "04:30", "venue": "St Regis - room A", "type": "makeup", "group": "groom,groomsman", "agenda": "groom & groomsman to wakeup", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "04:30", "end": "05:00", "venue": "St Regis - room A", "type": "makeup", "group": "groom", "agenda": "groom makeup", "logistics": "", "notes": "$280 balance payment", "vendor": "Valda (Maestro Makeup)", "vendor_contact": "91113996", "pic1": "groom", "pic2": ""}, {"date": "2026-07-05", "start": "05:00", "end": "05:15", "venue": "St Regis - room B", "type": "makeup", "group": "groom,groom_mummy", "agenda": "bring makeup artist to mummy tay", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groom", "pic2": ""}, {"date": "2026-07-05", "start": "05:00", "end": "05:15", "venue": "CCK", "type": "check-in", "group": "bridesmaid", "agenda": "bridesmaid arrive at CCK", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "05:15", "end": "05:30", "venue": "St Regis - room A", "type": "prep", "group": "groom,groomsman", "agenda": "prepare to depart from hotel", "logistics": "1. Flower bouquet\n2. Angpao\n3. Orange", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "05:30", "end": "06:00", "venue": "", "type": "travel", "group": "groom,groomsman", "agenda": "enroute to CCK", "logistics": "Bridal Car\ngroom\ngroomsman_sly\ngroomsman_wayne\n\nMazda\ngroomsman_des\ngroomsman_mj\ngroomsman_mao", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "05:45", "end": "06:00", "venue": "CCK", "type": "setup", "group": "bridesmaid_trina", "agenda": "photographer arrival", "logistics": "", "notes": "$2,250 balance payment", "vendor": "Vince", "vendor_contact": "87780688", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "06:00", "end": "06:15", "venue": "CCK", "type": "photo", "group": "bride,bride_family", "agenda": "veiling by bride's parents", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "06:00", "end": "06:15", "venue": "CCK", "type": "admin", "group": "bridesmaid_trina groomsman_desmond", "agenda": "Trina liaise with Desmond for timing to head up", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "06:15", "end": "06:45", "venue": "CCK", "type": "gatecrash", "group": "bride,bridesmaid,groom,groomsman", "agenda": "mini gatecrash (no sweat, brains only)", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "06:45", "end": "07:00", "venue": "CCK", "type": "photo", "group": "bride,bride_daddy,groom", "agenda": "departure from CCK\npapa yap fetch bride with red umbrella and fan", "logistics": "1. Red Umbrella\n2. Fan", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "07:00", "end": "07:15", "venue": "", "type": "travel", "group": "bride,bridesmaid,groom,groomsman", "agenda": "enroute to outdoor shoot location", "logistics": "Bridal Car\ngroomsman_sly\ngroom\nbride\n\nHyundai\nbridesmaid_peishang\nbridesmaid_hweiye\nbridesmaid_trina\nbridesmaid_shulin\n\nMazda\ngroomsman_wayne\ngroomsman_des\ngroomsman_mj\ngroomsman_mao", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "07:15", "end": "08:00", "venue": "outdoor (TBC)", "type": "photo", "group": "bride,bridesmaid,groom,groomsman", "agenda": "outdoor shoot", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "08:00", "end": "08:30", "venue": "", "type": "travel", "group": "bride,bridesmaid,groom,groomsman", "agenda": "enroute to hotel", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "07:30", "end": "09:00", "venue": "St Regis - foyer", "type": "setup", "group": "", "agenda": "victoria wedding to setup decoration", "logistics": "", "notes": "", "vendor": "Victoria", "vendor_contact": "80882242", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "08:30", "end": "09:00", "venue": "St Regis", "type": "photo", "group": "bride,groom", "agenda": "phototaking at the hotel", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "08:30", "end": "09:00", "venue": "St Regis - reception", "type": "setup", "group": "groomsman_sly groomsman_mao groomsman_wayne bridesmaid_hweiye", "agenda": "get stuff from room and setup reception table", "logistics": "1. tea ceremony decorations\n2. guest book & angbao box\n3. table seating arrangement\n4. taiwan photos", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "08:30", "end": "09:00", "venue": "St Regis - bridal suite", "type": "setup", "group": "bridesmaid_trina", "agenda": "check-in if needed and receive Hana", "logistics": "", "notes": "Hana will stay until 2pm", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "09:00", "end": "09:45", "venue": "St Regis - bridal suite", "type": "makeup", "group": "bride,groom", "agenda": "touchup makeup", "logistics": "", "notes": "", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "08:45", "end": "09:15", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_mj groomsman_desmond", "agenda": "vendor arrival - setup aisle and banquet tables", "logistics": "1. bingo card\n2. bubble gun", "notes": "desmond to also setup bingo cards on banquet tables", "vendor": "JM Floral", "vendor_contact": "", "pic1": "groomsman_mj", "pic2": "groomsman_desmond"}, {"date": "2026-07-05", "start": "08:45", "end": "09:15", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_mj groomsman_desmond", "agenda": "vendor arrival - setup aisle and banquet tables", "logistics": "", "notes": "", "vendor": "Balloon - TBC", "vendor_contact": "TBC", "pic1": "groomsman_mj", "pic2": "groomsman_desmond"}, {"date": "2026-07-05", "start": "08:45", "end": "09:15", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_mj groomsman_desmond", "agenda": "vendor arrival - setup booth at foyer", "logistics": "", "notes": "", "vendor": "Toast Box", "vendor_contact": "", "pic1": "groomsman_mj", "pic2": ""}, {"date": "2026-07-05", "start": "08:45", "end": "09:15", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_mj groomsman_desmond", "agenda": "vendor arrival - receive emcee", "logistics": "1. video montage\n2. music\n3. short photoshoot video\n4. phototaking sequence", "notes": "", "vendor": "Emcee Jia Yang", "vendor_contact": "", "pic1": "groomsman_mj", "pic2": ""}, {"date": "2026-07-05", "start": "09:00", "end": "09:45", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_sly groomsman_mao groomsman_wayne bridesmaid_hweiye", "agenda": "get ready reception table and tea ceremony", "logistics": "Reception/foyer\n1. Guest book & angbao box\n2. Victoria wedding photos\n3. Table Seating Arrangement A3 Size - 6 Copies\n4. Taiwan photos\n\nTea Ceremony\n1. Tea Ceremony Decorations", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_sly", "pic2": "groomsman_mao"}, {"date": "2026-07-05", "start": "09:45", "end": "12:15", "venue": "St Regis - foyer", "type": "station", "group": "groomsman_sly groomsman_mao bridesmaid_hweiye", "agenda": "station at reception table", "logistics": "", "notes": "Registration IC (Groom)\n- Sly\n- Mao\n\nRegistration IC (Bride)\n- Hweiye (Friends & Colleagues)\n- Xuan Yu/ Qiu Peng (Family)", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "09:45", "end": "10:30", "venue": "St Regis - foyer", "type": "ceremony", "group": "bride,groom", "agenda": "tea ceremony", "logistics": "", "notes": "pass angbao to reception table for safekeeping after", "vendor": "", "vendor_contact": "", "pic1": "bridesmaid_peishang", "pic2": "bridesmaid_shulin"}, {"date": "2026-07-05", "start": "10:30", "end": "11:00", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_wayne bridesmaid_peishang", "agenda": "transition to solemnization", "logistics": "Solemnization\n1. Wedding band\n2. Solemnisation Certificate\n3. NRICs of bride,groom,bride_daddy,groom_daddy", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "bridesmaid_peishang", "pic2": "bridesmaid_shulin"}, {"date": "2026-07-05", "start": "10:30", "end": "11:00", "venue": "St Regis - bridal suite", "type": "makeup", "group": "bride,groom", "agenda": "outfit change + makeup", "logistics": "", "notes": "", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "10:50", "end": "11:00", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_mj", "agenda": "receive solemnizer", "logistics": "", "notes": "will arrive via grab", "vendor": "Tan Peng Yam", "vendor_contact": "97779848", "pic1": "groomsman_mj", "pic2": ""}, {"date": "2026-07-05", "start": "11:00", "end": "11:30", "venue": "St Regis - foyer", "type": "ceremony", "group": "bride,groom", "agenda": "solemnization", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "bridesmaid_peishang", "pic2": "bridesmaid_shulin"}, {"date": "2026-07-05", "start": "11:30", "end": "11:45", "venue": "St Regis - foyer", "type": "ceremony", "group": "bride,groom", "agenda": "private vows", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "bridesmaid_peishang", "pic2": "bridesmaid_shulin"}, {"date": "2026-07-05", "start": "11:45", "end": "12:30", "venue": "St Regis - bridal suite", "type": "makeup", "group": "bride,groom", "agenda": "touchup makeup", "logistics": "", "notes": "", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "11:45", "end": "12:15", "venue": "St Regis - banquet", "type": "admin", "group": "", "agenda": "guests to settle down in banquet", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "12:15", "end": "12:30", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_sly groomsman_mao groomsman_wayne bridesmaid_hweiye", "agenda": "keep valuables from reception table in bridal room", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_sly", "pic2": "groomsman_mao"}, {"date": "2026-07-05", "start": "12:15", "end": "12:30", "venue": "St Regis - banquet", "type": "ceremony", "group": "", "agenda": "video montage + buffer", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "12:30", "end": "12:40", "venue": "St Regis - banquet", "type": "ceremony", "group": "bride,bridesmaid,groom,groomsman", "agenda": "1st march in + cake cutting", "logistics": "balloon popping", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "12:40", "end": "13:00", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#1 appetiser", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "13:00", "end": "13:20", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#2 soup", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "13:00", "end": "14:00", "venue": "St Regis - bridal suite", "type": "makeup", "group": "bride,groom", "agenda": "outfit change + makeup", "logistics": "", "notes": "", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "13:20", "end": "13:40", "venue": "St Regis - banquet", "type": "ceremony", "group": "", "agenda": "bingo", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "13:20", "end": "13:40", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#3 vegatable", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "13:40", "end": "14:00", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#4 fish", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "14:00", "end": "14:20", "venue": "St Regis - banquet", "type": "ceremony", "group": "bride,bridesmaid,groom,groomsman", "agenda": "2nd march in + yum seng + short speech", "logistics": "bubble gun", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "14:20", "end": "15:30", "venue": "St Regis - banquet", "type": "ceremony", "group": "bride,bridesmaid,groom,groomsman", "agenda": "phototaking at the stage", "logistics": "phototaking sequence", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "14:00", "end": "14:20", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#5 chicken", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "14:20", "end": "14:40", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#6 noodle", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "14:40", "end": "15:00", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#7 dessert", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "15:30", "end": "16:00", "venue": "St Regis - banquet", "type": "admin", "group": "", "agenda": "clear venue", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}];
+
+const TE={prep:'📦',makeup:'💄',travel:'🚗',setup:'🔧',ceremony:'💍',
+  photo:'📸',admin:'📋','check-in':'🏨',gatecrash:'🎉',station:'📌',food:'🍽️',station:'📌'};
+const TL={prep:'Prep',makeup:'Makeup',travel:'Travel',setup:'Setup',
+  ceremony:'Ceremony',photo:'Photo',admin:'Admin','check-in':'Check-in',
+  gatecrash:'Gatecrash',station:'Station',food:'Food',station:'Station'};
+
+const GNAME={bride:'Bride',groom:'Groom',bride_mummy:"Bride's Mum",
+  bride_daddy:"Bride's Dad",bride_family:'Bride Family',groom_mummy:"Groom's Mum",
+  groom_family:'Groom Family',bridesmaid:'All Bridesmaids',groomsman:'All Groomsmen'};
+
+function fmtN(p){
+  p=p.trim();
+  if(GNAME[p])return GNAME[p];
+  if(p.startsWith('bridesmaid_'))return p.replace('bridesmaid_','').replace(/\b\w/g,c=>c.toUpperCase());
+  if(p.startsWith('groomsman_'))return p.replace('groomsman_','').replace(/\b\w/g,c=>c.toUpperCase());
+  return p.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+}
+function fmtGroup(g){return(g||'').split(/[,\n]/).map(p=>p.trim()).filter(Boolean).map(fmtN).join(', ');}
+function gf(r){
+  const ps=(r.group||'').toLowerCase().split(/[,\n]/).map(s=>s.trim()).filter(Boolean);
+  const b=ps.some(p=>p==='bride'||p==='bride_mummy'||p==='bride_daddy'||p==='bride_family');
+  const g=ps.some(p=>p==='groom'||p==='groom_mummy'||p==='groom_family');
+  const bm=ps.some(p=>p.startsWith('bridesmaid'));
+  const gm=ps.some(p=>p.startsWith('groomsman'));
+  const bmN=ps.filter(p=>p.startsWith('bridesmaid')).length;
+  const gmN=ps.filter(p=>p.startsWith('groomsman')).length;
+  return{b,g,bm,gm,bmN,gmN,any:b||g||bm||gm};
+}
+
+function card(ev,cls){
+  const who=fmtGroup(ev.group);
+  const pics=[ev.pic1,ev.pic2].filter(Boolean).map(fmtN).join(', ');
+  const note=ev.notes&&ev.notes.length<160?ev.notes:'';
+  return`<div class="card ${cls}">
+    <div class="c-badge">${TE[ev.type]||''} ${TL[ev.type]||ev.type}</div>
+    <div class="c-title">${ev.agenda}</div>
+    <div class="c-info">
+      <span>⏱ ${ev.start}${ev.end?' – '+ev.end:''}</span>
+      ${ev.venue?`<span>📍 ${ev.venue}</span>`:''}
+    </div>
+    ${who?`<div class="c-who">👤 ${who}</div>`:''}
+    ${ev.vendor?`<div class="c-vendor">🏢 ${ev.vendor}${ev.vendor_contact?' &thinsp;·&thinsp; '+ev.vendor_contact:''}</div>`:''}
+    ${pics&&pics!==who?`<div class="c-pic">PIC: ${pics}</div>`:''}
+    ${note?`<div class="c-note">${note}</div>`:''}
+  </div>`;
+}
+
+/* ── PHASE 1 CLASSIFIER ─────────────────────────────── */
+/* cols: bride | groom | vendor   joint → spans all */
+function c1(r){
+  const{b,g,bm,gm}=gf(r);
+  const hasBride=b||bm, hasGroom=g||gm;
+  // Vendor column: setup event with vendor, or empty-group vendor
+  if(r.vendor&&r.type==='setup') return'vendor';
+  if(hasBride&&hasGroom) return'joint';
+  if(hasBride) return'bride';
+  if(hasGroom) return'groom';
+  return'joint';
+}
+
+/* ── PHASE 2 CLASSIFIER ─────────────────────────────── */
+/* cols: couple | bridesmaids | groomsmen | vendors */
+/* returns array — event can appear in multiple cols */
+function c2(r){
+  const{b,g,bm,gm,bmN,gmN}=gf(r);
+  // Vendor arrivals → vendor col
+  const vArr=r.vendor&&(r.agenda.toLowerCase().startsWith('vendor arrival')||r.agenda.toLowerCase().includes('receive solemnizer'));
+  if(vArr) return['vendor'];
+  // Couple: only bride/groom names, no party
+  if((b||g)&&!bm&&!gm) return['couple'];
+  // Mixed bm+gm: show in both if close in count, else majority
+  if(bm&&gm){
+    if(Math.abs(bmN-gmN)<=1) return['bm','gm'];
+    return gmN>bmN?['gm']:['bm'];
+  }
+  if(bm) return['bm'];
+  if(gm) return['gm'];
+  return['couple']; // empty group → pre-banquet flow
+}
+
+/* ── PHASE 3 CLASSIFIER ─────────────────────────────── */
+/* cols: couple | program */
+function c3(r){
+  const{b,g,bm,gm}=gf(r);
+  return(b||g||bm||gm)?'couple':'program';
+}
+
+/* ── ROW BUILDER ────────────────────────────────────── */
+function toMin(t){if(!t)return 0;const[hh,mm]=t.split(':').map(Number);return hh*60+mm;}
+function durMin(r){
+  if(!r.start||!r.end)return 30;
+  const[sh,sm]=r.start.split(':').map(Number);
+  const[eh,em]=r.end.split(':').map(Number);
+  const d=(eh*60+em)-(sh*60+sm);
+  return d>0?d:30;
+}
+function rowH(evs){return Math.max(Math.round(Math.max(...evs.map(durMin))*1.4),88);}
+
+/* Colour per event type — for continuation stripes */
+const TYPE_CLR={prep:'#7a9e7e',makeup:'#c47a8a',travel:'#6a8fb5',setup:'#b8986a',
+  ceremony:'#8b6fb5',photo:'#5a9ea0',admin:'#9aaa7a','check-in':'#c49a4a',
+  gatecrash:'#d4734a',station:'#7a8fa0'};
+
+/* Events in colAllEvs that started before t and are still running */
+function getRunning(colAllEvs,t){
+  const tMin=toMin(t);
+  return colAllEvs.filter(e=>toMin(e.start)<tMin&&e.end&&toMin(e.end)>tMin);
+}
+
+/* Render one column cell.
+   - running events → 4 px coloured continuation stripe on the left
+   - new events     → card indented 14 px (leaving stripe visible)          */
+function colCell(newEvs,runEvs,cls){
+  if(!newEvs.length&&!runEvs.length)return'<div></div>';
+
+  // No running event: plain card in normal flow — row expands to content height
+  if(!runEvs.length){
+    return`<div>${newEvs.map(ev=>card(ev,cls)).join('')}</div>`;
+  }
+
+  // Running event: show a 4 px coloured stripe on the left edge,
+  // new cards indented 14 px (normal flow so row expands to fit content)
+  const clr=TYPE_CLR[runEvs[0].type]||'#b8986a';
+  let s=`<div style="position:relative;">
+    <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:${clr};z-index:1;"></div>`;
+  newEvs.forEach((ev,i)=>{
+    s+=`<div style="margin-left:${14+i*4}px;">${card(ev,cls)}</div>`;
+  });
+  s+='</div>';
+  return s;
+}
+
+function byTime(evs){
+  const m={};
+  evs.forEach(e=>{(m[e.start]=m[e.start]||[]).push(e);});
+  return m;
+}
+
+/* Phase 1: 3-col + joint span, with running-event continuation stripes */
+function rowsP1(evs){
+  const g=byTime(evs); let html='';
+  // Pre-collect all events per column for running detection
+  const allB=evs.filter(e=>c1(e)==='bride');
+  const allG=evs.filter(e=>c1(e)==='groom');
+  const allV=evs.filter(e=>c1(e)==='vendor');
+
+  Object.keys(g).sort().forEach(t=>{
+    const all=g[t];
+    const brideNew=all.filter(e=>c1(e)==='bride');
+    const groomNew=all.filter(e=>c1(e)==='groom');
+    const vendorNew=all.filter(e=>c1(e)==='vendor');
+    const joint    =all.filter(e=>c1(e)==='joint');
+    const brideRun=getRunning(allB,t);
+    const groomRun=getRunning(allG,t);
+    const vendorRun=getRunning(allV,t);
+    const hasSide=brideNew.length||groomNew.length||vendorNew.length
+                 ||brideRun.length||groomRun.length||vendorRun.length;
+    const h=rowH(all);
+
+    let inner='';
+    if(joint.length&&!hasSide){
+      inner=`<div class="span-all">${joint.map(e=>card(e,'joint')).join('')}</div>`;
+    } else {
+      if(joint.length) inner+=`<div class="span-all">${joint.map(e=>card(e,'joint')).join('')}</div>`;
+      inner+=colCell(brideNew,brideRun,'bride');
+      inner+=colCell(groomNew,groomRun,'groom');
+      inner+=colCell(vendorNew,vendorRun,'vendor');
+    }
+
+    html+=`<div class="trow" style="min-height:${h}px">
+      <div class="tt">${t}</div>
+      <div class="tinner" style="grid-template-columns:1fr 1fr 1fr;">${inner}</div>
+    </div>`;
+  });
+  return html;
+}
+
+/* Phase 2: 4-col with continuation stripes */
+function rowsP2(evs){
+  const g=byTime(evs); let html='';
+  const cols=['couple','bm','gm','vendor'];
+  const clsMap={couple:'couple',bm:'bm',gm:'gm',vendor:'vendor'};
+  const allC={};
+  cols.forEach(col=>{allC[col]=evs.filter(e=>[].concat(c2(e)).includes(col));});
+
+  Object.keys(g).sort().forEach(t=>{
+    const all=g[t];
+    const buckets={couple:[],bm:[],gm:[],vendor:[]};
+    all.forEach(e=>[].concat(c2(e)).forEach(col=>{if(buckets[col])buckets[col].push(e);}));
+    const h=rowH(all);
+    html+=`<div class="trow" style="min-height:${h}px">
+      <div class="tt">${t}</div>
+      <div class="tinner" style="grid-template-columns:1fr 1fr 1fr 1fr;">
+        ${cols.map(col=>colCell(buckets[col],getRunning(allC[col],t),clsMap[col])).join('')}
+      </div>
+    </div>`;
+  });
+  return html;
+}
+
+/* Phase 3: 2-col with continuation stripes */
+function rowsP3(evs){
+  const g=byTime(evs); let html='';
+  const allC={couple:evs.filter(e=>c3(e)==='couple'),
+              program:evs.filter(e=>c3(e)==='program')};
+  Object.keys(g).sort().forEach(t=>{
+    const all=g[t];
+    const buckets={couple:[],program:[]};
+    all.forEach(e=>buckets[c3(e)].push(e));
+    const h=rowH(all);
+    html+=`<div class="trow" style="min-height:${h}px">
+      <div class="tt">${t}</div>
+      <div class="tinner" style="grid-template-columns:1fr 1fr;">
+        ${colCell(buckets.couple,getRunning(allC.couple,t),'couple')}
+        ${colCell(buckets.program,getRunning(allC.program,t),'prog')}
+      </div>
+    </div>`;
+  });
+  return html;
+}
+
+/* ── PHASE WRAPPER ──────────────────────────────────── */
+function phase(num,title,sub,colDefs,rows){
+  const chGrid=`grid-template-columns:${colDefs.map(()=>'1fr').join(' ')};`;
+  const heads=colDefs.map(c=>`<div class="ch ${c.cls}">${c.label}</div>`).join('');
+  return`<div class="phase">
+    <div class="phase-hd">
+      <div class="phase-num">Part ${num}</div>
+      <div class="phase-title">${title}</div>
+      <div class="phase-sub">${sub}</div>
+    </div>
+    <div class="phase-divider"></div>
+    <div class="col-header-row">
+      <div class="ch-spacer"></div>
+      <div class="ch-grid" style="${chGrid}">${heads}</div>
+    </div>
+    ${rows}
+  </div>`;
+}
+
+/* ── RENDER ─────────────────────────────────────────── */
+const d5=DATA.filter(r=>r.date==='2026-07-05'&&r.start);
+
+document.getElementById('root').innerHTML=
+  phase(1,
+    'Morning Prep &amp; Gatecrash',
+    'Bride &amp; family at CCK · Groom &amp; groomsmen at St Regis · Link up at CCK → outdoor shoot → back to hotel',
+    [{label:'👰 Bride &amp; Family',cls:'bride'},
+     {label:'🤵 Groom &amp; Groomsmen',cls:'groom'},
+     {label:'🎨 Hair, Makeup &amp; Vendors',cls:'vendor'}],
+    rowsP1(d5.filter(r=>r.start<='08:01')))
+
+  +phase(2,
+    'Hotel: Setup, Ceremonies &amp; Prep',
+    'Everyone at St Regis · Couple: photos, tea ceremony, outfit changes, solemnization · Bridal party runs stations &amp; receives vendors',
+    [{label:'💑 Bride &amp; Groom',cls:'couple'},
+     {label:'💐 Bridesmaids',cls:'bm'},
+     {label:'🎩 Groomsmen',cls:'gm'},
+     {label:'🏢 Vendors &amp; Setup',cls:'vendor'}],
+    rowsP2(d5.filter(r=>r.start>'08:01'&&r.start<'12:29')))
+
+  +phase(3,
+    'Banquet',
+    'St Regis Ballroom · 7-course dinner · Couple steps out between courses for outfit changes',
+    [{label:'💑 Bride &amp; Groom',cls:'couple'},
+     {label:'🎭 Banquet Program',cls:'prog'}],
+    rowsP3(d5.filter(r=>r.start>='12:29')));
+</script>
+</body>
+</html>

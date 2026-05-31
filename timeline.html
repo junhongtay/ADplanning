@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jun Hong & Qiu Yi — 5 July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #b8986a;
+    --gold-light: #d4b896;
+    --gold-pale: #f5ede0;
+    --dark: #1a1510;
+    --mid: #3d3020;
+    --text: #2c2416;
+    --muted: #8a7a65;
+    --bg: #faf7f2;
+    --white: #ffffff;
+    --border: #e8ddd0;
+
+    --prep: #7a9e7e;
+    --makeup: #c47a8a;
+    --travel: #6a8fb5;
+    --setup: #b8986a;
+    --ceremony: #8b6fb5;
+    --photo: #5a9ea0;
+    --admin: #9aaa7a;
+    --checkin: #c49a4a;
+    --gatecrash: #d4734a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--dark);
+    padding: 14px 40px 12px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(184,152,106,0.18) 0%, transparent 70%);
+  }
+  .header-ornament {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: 0.8;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+  .header h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .header-sub {
+    font-size: 13px;
+    color: var(--gold-light);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 4px;
+    font-weight: 300;
+  }
+  .header-line {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 8px auto 0;
+    opacity: 0.5;
+  }
+
+  /* CONTROLS */
+  .controls {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 7px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .controls-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    flex: 1;
+  }
+  .filter-btn {
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-weight: 400;
+  }
+  .filter-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .filter-btn.active {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: var(--white);
+  }
+  .filter-btn.active.person {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--dark);
+    font-weight: 500;
+  }
+
+  .day-tabs {
+    display: flex;
+    gap: 6px;
+  }
+  .day-tab {
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 400;
+  }
+  .day-tab.active {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: var(--white);
+  }
+
+  .search-wrap {
+    position: relative;
+  }
+  .search-input {
+    padding: 4px 10px 4px 26px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--text);
+    outline: none;
+    width: 160px;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { border-color: var(--gold); }
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  /* PERSON FILTER ROW */
+  .person-controls {
+    background: var(--gold-pale);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+
+  /* TIMELINE */
+  .timeline-wrap {
+    padding: 16px 40px 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .day-section {
+    margin-bottom: 12px;
+  }
+  .day-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .day-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--mid);
+    font-style: italic;
+  }
+  .day-date {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .day-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* TIMELINE TABLE — time-scaled, flush rows */
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-item::before { display: none; }
+
+  .time-col {
+    padding: 7px 8px 4px 0;
+    text-align: right;
+    position: relative;
+    border-right: 2px solid var(--border);
+    background: var(--bg);
+    flex-shrink: 0;
+  }
+  .time-start {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .time-end {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .time-dot { display: none; }
+
+  .content-col {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .event-card {
+    background: var(--white);
+    border-radius: 0;
+    border: none;
+    padding: 7px 12px 7px 14px;
+    flex: 1;
+    transition: background 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .event-card:hover { background: #f5f1ea; }
+  .timeline-item:nth-child(even) .event-card { background: #fdfaf6; }
+  .timeline-item:nth-child(even) .event-card:hover { background: #f5f1ea; }
+  .event-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+  }
+
+  /* type colors */
+  .card-prep::before { background: var(--prep); }
+  .card-makeup::before { background: var(--makeup); }
+  .card-travel::before { background: var(--travel); }
+  .card-setup::before { background: var(--setup); }
+  .card-ceremony::before { background: var(--ceremony); }
+  .card-photo::before { background: var(--photo); }
+  .card-admin::before { background: var(--admin); }
+  .card-check-in::before { background: var(--checkin); }
+  .card-gatecrash::before { background: var(--gatecrash); }
+  .card-station::before { background: #7a8fa0; }
+
+
+  .station::before { background: #8a9fa8; }
+  .food::before    { background: #e08040; }
+  .badge-station   { background: #8a9fa8; color: #fff; }
+  .badge-food      { background: #e08040; color: #fff; }
+  .card-station    { border-left-color: #8a9fa8; }
+  .card-food       { border-left-color: #e08040; }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 3px;
+  }
+  .card-agenda {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--dark);
+    line-height: 1.2;
+    flex: 1;
+  }
+  .card-badges {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-shrink: 0;
+  }
+  .badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .badge-type { background: var(--gold-pale); color: var(--gold); border: 1px solid var(--gold-light); }
+  .badge-venue { background: #f0f4f8; color: #5a7a9a; border: 1px solid #c8d8e8; }
+
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .meta-icon { font-size: 11px; }
+
+  .card-groups {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .group-tag {
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    background: #f5f0ea;
+    color: var(--mid);
+    border: 1px solid var(--border);
+  }
+  .group-tag.highlight {
+    background: var(--dark);
+    color: var(--white);
+    border-color: var(--dark);
+  }
+
+  .card-details {
+    margin-top: 10px;
+    display: none;
+  }
+  .card-details.open { display: block; }
+  .detail-section {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .detail-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .detail-text {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.6;
+    white-space: pre-line;
+  }
+
+  .vendor-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold-pale);
+    border-radius: 6px;
+    padding: 5px 10px;
+    margin-top: 5px;
+  }
+  .vendor-name { font-size: 12px; font-weight: 500; color: var(--dark); }
+  .vendor-contact {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .vendor-contact a { color: var(--gold); text-decoration: none; }
+  .vendor-contact a:hover { text-decoration: underline; }
+
+  .expand-btn {
+    font-size: 11px;
+    color: var(--gold);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    padding: 0;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    letter-spacing: 0.5px;
+  }
+  .expand-btn:hover { color: var(--dark); }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+  .empty-state .icon { font-size: 32px; margin-bottom: 12px; }
+  .empty-state p { font-size: 14px; }
+
+  /* PRINT STYLES */
+  @media print {
+    .controls, .person-controls, .stats-bar, #pc-bride, #pc-groom, #pc-vendor { display: none !important; }
+    .event-card { break-inside: avoid; }
+    /* Force ALL detail sections open */
+    .card-details,
+    .card-details.open,
+    div.card-details { display: block !important; visibility: visible !important; height: auto !important; overflow: visible !important; }
+    .expand-btn { display: none !important; }
+    body { background: white; }
+    .header { background: var(--dark) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .day-section { break-before: auto; }
+    .timeline-item { break-inside: avoid; }
+  }
+
+  /* ── MOBILE (portrait) ─────────────────────────────────────── */
+  @media (max-width: 640px) {
+
+    /* Header — tighter */
+    .header { padding: 10px 16px 9px; }
+    .header-ornament { font-size: 10px; letter-spacing: 3px; }
+    .header h1 { font-size: clamp(18px, 7vw, 26px); }
+    .header-sub { font-size: 10px; letter-spacing: 2px; margin-top: 2px; }
+    .header-line { display: none; }
+
+    /* Main controls bar */
+    .controls { padding: 6px 12px; gap: 5px 7px; }
+    .controls-label { font-size: 10px; letter-spacing: 1px; }
+
+    /* Type filter — horizontal scroll (no wrapping) */
+    #type-filters {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 1px;
+      flex: 0 1 auto;
+    }
+    #type-filters::-webkit-scrollbar { display: none; }
+
+    /* Day tabs + filter buttons — larger touch targets */
+    .day-tab, .filter-btn {
+      font-size: 11px;
+      padding: 5px 11px;
+      min-height: 30px;
+      white-space: nowrap;
+    }
+
+    /* Search — narrower */
+    .search-input { width: 110px; font-size: 11px; }
+
+    /* Person filter rows — horizontal scroll, no wrap */
+    .person-controls {
+      padding: 6px 12px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      gap: 5px;
+    }
+    .person-controls::-webkit-scrollbar { display: none; }
+    .person-controls .filter-group { flex-wrap: nowrap; flex-shrink: 0; }
+    .person-controls .controls-label { flex-shrink: 0; }
+
+    /* Stats bar */
+    .stats-bar { padding: 4px 12px; font-size: 11px; gap: 10px; }
+    .print-btn { display: none; }
+
+    /* Timeline wrapper — much narrower side padding */
+    .timeline-wrap { padding: 12px 12px 32px; }
+
+    /* Day section heading */
+    .day-section { margin-bottom: 8px; }
+    .day-heading { margin-bottom: 14px; gap: 10px; }
+    .day-label { font-size: 14px; }
+    .day-date { font-size: 10px; letter-spacing: 2px; }
+
+    /* Timeline grid — narrower time column, smaller gap */
+    .timeline-item { grid-template-columns: 52px 1fr; gap: 0 10px; }
+    .timeline-item::before { left: 52px; }
+
+    /* Time column */
+    .time-col { padding: 7px 0; }
+    .time-start { font-size: 11px; }
+    .time-end { font-size: 10px; }
+    .time-dot { right: -10px; top: 11px; width: 8px; height: 8px; }
+
+    /* Content column */
+    .content-col { padding: 5px 0 7px 16px; }
+
+    /* Event cards */
+    .event-card { padding: 7px 10px; border-radius: 8px; }
+    .card-top { gap: 7px; margin-bottom: 2px; }
+    .card-agenda { font-size: 12.5px; }
+    .card-badges { gap: 3px; }
+    .badge { font-size: 9.5px; padding: 2px 6px; }
+    .card-meta { font-size: 10.5px; gap: 3px 8px; margin-top: 3px; }
+    .meta-icon { font-size: 10.5px; }
+    .card-groups { margin-top: 3px; gap: 3px; }
+    .group-tag { font-size: 10px; padding: 1px 5px; }
+    .expand-btn { font-size: 10.5px; margin-top: 3px; }
+
+    /* Vendor block in expanded details */
+    .vendor-block { padding: 4px 9px; gap: 8px; }
+    .vendor-name { font-size: 11px; }
+    .vendor-contact { font-size: 11px; }
+    .detail-text { font-size: 11.5px; line-height: 1.5; }
+    .detail-label { font-size: 10px; letter-spacing: 1px; }
+  }
+
+  .hidden { display: none !important; }
+
+  /* Stats bar */
+  .stats-bar {
+    padding: 5px 40px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .stats-count { font-weight: 500; color: var(--dark); }
+
+  .print-btn {
+    margin-left: auto;
+    padding: 5px 14px;
+    border-radius: 16px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    cursor: pointer;
+    letter-spacing: 0.5px;
+  }
+  .print-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── TYPE DROPDOWN ──────────────────────────────────────── */
+  .type-dd { position: relative; }
+
+  #type-dd-btn { display: flex; align-items: center; gap: 3px; }
+  #type-dd-btn.has-active {
+    background: var(--dark); border-color: var(--dark); color: var(--white);
+  }
+  #type-dd-count {
+    font-size: 10px; font-weight: 600;
+    background: var(--gold); color: var(--dark);
+    border-radius: 8px; padding: 0 5px; margin-left: 2px;
+    display: none;
+  }
+  #type-dd-count.visible { display: inline; }
+
+  .type-dd-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px;
+    gap: 5px;
+    flex-wrap: wrap;
+    z-index: 300;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    min-width: 240px;
+    max-width: min(320px, calc(100vw - 24px));
+  }
+  .type-dd-panel.open { display: flex; }
+
+  /* On mobile ensure panel doesn't overflow right edge */
+  @media (max-width: 640px) {
+    .type-dd-panel { left: auto; right: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-ornament">Wedding Day Programme</div>
+  <h1><em>Jun Hong</em> &amp; <em>Qiu Yi</em></h1>
+  <div class="header-sub">5 July 2026 &nbsp;·&nbsp; St Regis Singapore</div>
+  <div class="header-line"></div>
+</div>
+
+<div class="controls">
+  <span class="controls-label">Day</span>
+  <div class="day-tabs">
+    <button class="day-tab active" onclick="setDay('all')">All</button>
+    <button class="day-tab" onclick="setDay('2026-07-04')">4 Jul</button>
+    <button class="day-tab" onclick="setDay('2026-07-05')">5 Jul</button>
+  </div>
+  <div class="filter-group">
+    <button class="filter-btn" id="loc-cck"     onclick="setLocation('cck')">📍 CCK</button>
+    <button class="filter-btn" id="loc-stregis" onclick="setLocation('stregis')">🏨 St Regis</button>
+  </div>
+  <div class="type-dd" id="type-dd">
+    <button class="filter-btn" id="type-dd-btn" onclick="toggleTypeDD(event)">🔖 Type<span id="type-dd-count"></span> ▾</button>
+    <div class="type-dd-panel" id="type-dd-panel"></div>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="search-box" type="text" placeholder="Search..." oninput="applyFilters()">
+  </div>
+</div>
+
+<div class="person-controls" id="pc-bride">
+  <span class="controls-label">💐 Bride side</span>
+  <div class="filter-group" id="filters-bride"></div>
+</div>
+<div class="person-controls" id="pc-groom" style="background:#f0f4f0;">
+  <span class="controls-label">🤵 Groom side</span>
+  <div class="filter-group" id="filters-groom"></div>
+</div>
+<div class="person-controls" id="pc-vendor" style="background:#f0f0f5;">
+  <span class="controls-label">🏢 Vendors</span>
+  <div class="filter-group" id="filters-vendor"></div>
+</div>
+
+<div class="stats-bar">
+  <span id="stats-text">Loading…</span>
+  <button class="print-btn" onclick="window.print()">🖨 Print</button>
+</div>
+
+<div class="timeline-wrap" id="timeline"></div>
+
+<script>
+const DATA = [{"date": "2026-07-04", "start": "12:00", "end": "13:00", "venue": "Woodlands", "type": "prep", "group": "groom,groomsman", "agenda": "collect flowers & install on bridal car", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-04", "start": "13:30", "end": "14:00", "venue": "CCK", "type": "prep", "group": "groom,groomsman", "agenda": "pass flower wrist corsages to CCK", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-04", "start": "14:00", "end": "14:30", "venue": "CCK", "type": "prep", "group": "groom,groomsman", "agenda": "load items into bridal car or/and mazda", "logistics": "Personal\n1. Suits + tie/bowtie + shoe + socks\n2. Underwear, pyjamas and Casual Clothes (2 Days)\n3. Hair Wax\n4. Shaver\n5. Facial Cleanser\n6. Orange (check how many)\n7. Angbao\n8. 2nd and 3rd gown\n\nReception/foyer\n1. Guest book & angbao box (check with Michelle)\n2. Victoria wedding photos (to check with vendor)\n3. Table Seating Arrangement A3 Size - 6 Copies\n4. Taiwan photos\n\nTea Ceremony\n1. Tea Ceremony Decorations\n (To check with Michelle if can set this up the day before for tea ceremony)\n\nSolemnization\n1. Wedding band\n2. Solemnisation Certificate (need to print)\n\nBanquet\n1. bingo card\n2. bubble gun", "notes": "total 2 drivers for Mazda + bridal car", "vendor": "", "vendor_contact": "", "pic1": "groomsman_wayne", "pic2": ""}, {"date": "2026-07-04", "start": "14:00", "end": "14:30", "venue": "CCK", "type": "prep", "group": "bride", "agenda": "double check items to be left at CCK", "logistics": "1. Red Umbrella\n2. Fan\n3. Hyundai", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_wayne", "pic2": ""}, {"date": "2026-07-04", "start": "14:30", "end": "18:00", "venue": "CCK", "type": "admin", "group": "bride", "agenda": "call vendors to make sure they are coming", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-04", "start": "15:00", "end": "15:30", "venue": "St Regis - room A", "type": "check-in", "group": "groom,groomsman", "agenda": "Hotel Check-in & Settle Down", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-04", "start": "15:00", "end": "15:30", "venue": "St Regis - room B", "type": "check-in", "group": "groom_family", "agenda": "Hotel Check-in & Settle Down", "logistics": "", "notes": "maybe book grab for transport", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "02:30", "end": "03:00", "venue": "CCK", "type": "makeup", "group": "bride", "agenda": "wake up & wash hair", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "03:00", "end": "06:00", "venue": "CCK", "type": "makeup", "group": "bride", "agenda": "bridal makeup", "logistics": "", "notes": "check if can start earlier", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "04:30", "end": "04:45", "venue": "CCK", "type": "makeup", "group": "bride_mummy", "agenda": "mummy yap to wake up", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "04:45", "end": "05:45", "venue": "CCK", "type": "makeup", "group": "bride_mummy", "agenda": "mummy yap makeup", "logistics": "", "notes": "$300 balance payment", "vendor": "Ann Chong", "vendor_contact": "87176134", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "04:00", "end": "04:30", "venue": "St Regis - room A", "type": "makeup", "group": "groom,groomsman", "agenda": "groom & groomsman to wakeup", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "04:30", "end": "05:00", "venue": "St Regis - room A", "type": "makeup", "group": "groom", "agenda": "groom makeup", "logistics": "", "notes": "$280 balance payment", "vendor": "Valda (Maestro Makeup)", "vendor_contact": "91113996", "pic1": "groom", "pic2": ""}, {"date": "2026-07-05", "start": "05:00", "end": "05:15", "venue": "St Regis - room B", "type": "makeup", "group": "groom,groom_mummy", "agenda": "bring makeup artist to mummy tay", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groom", "pic2": ""}, {"date": "2026-07-05", "start": "05:00", "end": "05:15", "venue": "CCK", "type": "check-in", "group": "bridesmaid", "agenda": "bridesmaid arrive at CCK", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "05:15", "end": "05:30", "venue": "St Regis - room A", "type": "prep", "group": "groom,groomsman", "agenda": "prepare to depart from hotel", "logistics": "1. Flower bouquet\n2. Angpao\n3. Orange", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "05:30", "end": "06:00", "venue": "", "type": "travel", "group": "groom,groomsman", "agenda": "enroute to CCK", "logistics": "Bridal Car\ngroom\ngroomsman_sly\ngroomsman_wayne\n\nMazda\ngroomsman_des\ngroomsman_mj\ngroomsman_mao", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "05:45", "end": "06:00", "venue": "CCK", "type": "setup", "group": "bridesmaid_trina", "agenda": "photographer arrival", "logistics": "", "notes": "$2,250 balance payment", "vendor": "Vince", "vendor_contact": "87780688", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "06:00", "end": "06:15", "venue": "CCK", "type": "photo", "group": "bride,bride_family", "agenda": "veiling by bride's parents", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "06:00", "end": "06:15", "venue": "CCK", "type": "admin", "group": "bridesmaid_trina groomsman_desmond", "agenda": "Trina liaise with Desmond for timing to head up", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "06:15", "end": "06:45", "venue": "CCK", "type": "gatecrash", "group": "bride,bridesmaid,groom,groomsman", "agenda": "mini gatecrash (no sweat, brains only)", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "06:45", "end": "07:00", "venue": "CCK", "type": "photo", "group": "bride,bride_daddy,groom", "agenda": "departure from CCK\npapa yap fetch bride with red umbrella and fan", "logistics": "1. Red Umbrella\n2. Fan", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "07:00", "end": "07:15", "venue": "", "type": "travel", "group": "bride,bridesmaid,groom,groomsman", "agenda": "enroute to outdoor shoot location", "logistics": "Bridal Car\ngroomsman_sly\ngroom\nbride\n\nHyundai\nbridesmaid_peishang\nbridesmaid_hweiye\nbridesmaid_trina\nbridesmaid_shulin\n\nMazda\ngroomsman_wayne\ngroomsman_des\ngroomsman_mj\ngroomsman_mao", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "07:15", "end": "08:00", "venue": "outdoor (TBC)", "type": "photo", "group": "bride,bridesmaid,groom,groomsman", "agenda": "outdoor shoot", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "08:00", "end": "08:30", "venue": "", "type": "travel", "group": "bride,bridesmaid,groom,groomsman", "agenda": "enroute to hotel", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "07:30", "end": "09:00", "venue": "St Regis - foyer", "type": "setup", "group": "", "agenda": "victoria wedding to setup decoration", "logistics": "", "notes": "", "vendor": "Victoria", "vendor_contact": "80882242", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "08:30", "end": "09:00", "venue": "St Regis", "type": "photo", "group": "bride,groom", "agenda": "phototaking at the hotel", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "08:30", "end": "09:00", "venue": "St Regis - reception", "type": "setup", "group": "groomsman_sly groomsman_mao groomsman_wayne bridesmaid_hweiye", "agenda": "get stuff from room and setup reception table", "logistics": "1. tea ceremony decorations\n2. guest book & angbao box\n3. table seating arrangement\n4. taiwan photos", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "08:30", "end": "09:00", "venue": "St Regis - bridal suite", "type": "setup", "group": "bridesmaid_trina", "agenda": "check-in if needed and receive Hana", "logistics": "", "notes": "Hana will stay until 2pm", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "09:00", "end": "09:45", "venue": "St Regis - bridal suite", "type": "makeup", "group": "bride,groom", "agenda": "touchup makeup", "logistics": "", "notes": "", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "08:45", "end": "09:15", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_mj groomsman_desmond", "agenda": "vendor arrival - setup aisle and banquet tables", "logistics": "1. bingo card\n2. bubble gun", "notes": "desmond to also setup bingo cards on banquet tables", "vendor": "JM Floral", "vendor_contact": "", "pic1": "groomsman_mj", "pic2": "groomsman_desmond"}, {"date": "2026-07-05", "start": "08:45", "end": "09:15", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_mj groomsman_desmond", "agenda": "vendor arrival - setup aisle and banquet tables", "logistics": "", "notes": "", "vendor": "Balloon - TBC", "vendor_contact": "TBC", "pic1": "groomsman_mj", "pic2": "groomsman_desmond"}, {"date": "2026-07-05", "start": "08:45", "end": "09:15", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_mj groomsman_desmond", "agenda": "vendor arrival - setup booth at foyer", "logistics": "", "notes": "", "vendor": "Toast Box", "vendor_contact": "", "pic1": "groomsman_mj", "pic2": ""}, {"date": "2026-07-05", "start": "08:45", "end": "09:15", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_mj groomsman_desmond", "agenda": "vendor arrival - receive emcee", "logistics": "1. video montage\n2. music\n3. short photoshoot video\n4. phototaking sequence", "notes": "", "vendor": "Emcee Jia Yang", "vendor_contact": "", "pic1": "groomsman_mj", "pic2": ""}, {"date": "2026-07-05", "start": "09:00", "end": "09:45", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_sly groomsman_mao groomsman_wayne bridesmaid_hweiye", "agenda": "get ready reception table and tea ceremony", "logistics": "Reception/foyer\n1. Guest book & angbao box\n2. Victoria wedding photos\n3. Table Seating Arrangement A3 Size - 6 Copies\n4. Taiwan photos\n\nTea Ceremony\n1. Tea Ceremony Decorations", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_sly", "pic2": "groomsman_mao"}, {"date": "2026-07-05", "start": "09:45", "end": "12:15", "venue": "St Regis - foyer", "type": "station", "group": "groomsman_sly groomsman_mao bridesmaid_hweiye", "agenda": "station at reception table", "logistics": "", "notes": "Registration IC (Groom)\n- Sly\n- Mao\n\nRegistration IC (Bride)\n- Hweiye (Friends & Colleagues)\n- Xuan Yu/ Qiu Peng (Family)", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}, {"date": "2026-07-05", "start": "09:45", "end": "10:30", "venue": "St Regis - foyer", "type": "ceremony", "group": "bride,groom", "agenda": "tea ceremony", "logistics": "", "notes": "pass angbao to reception table for safekeeping after", "vendor": "", "vendor_contact": "", "pic1": "bridesmaid_peishang", "pic2": "bridesmaid_shulin"}, {"date": "2026-07-05", "start": "10:30", "end": "11:00", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_wayne bridesmaid_peishang", "agenda": "transition to solemnization", "logistics": "Solemnization\n1. Wedding band\n2. Solemnisation Certificate\n3. NRICs of bride,groom,bride_daddy,groom_daddy", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "bridesmaid_peishang", "pic2": "bridesmaid_shulin"}, {"date": "2026-07-05", "start": "10:30", "end": "11:00", "venue": "St Regis - bridal suite", "type": "makeup", "group": "bride,groom", "agenda": "outfit change + makeup", "logistics": "", "notes": "", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "10:50", "end": "11:00", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_mj", "agenda": "receive solemnizer", "logistics": "", "notes": "will arrive via grab", "vendor": "Tan Peng Yam", "vendor_contact": "97779848", "pic1": "groomsman_mj", "pic2": ""}, {"date": "2026-07-05", "start": "11:00", "end": "11:30", "venue": "St Regis - foyer", "type": "ceremony", "group": "bride,groom", "agenda": "solemnization", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "bridesmaid_peishang", "pic2": "bridesmaid_shulin"}, {"date": "2026-07-05", "start": "11:30", "end": "11:45", "venue": "St Regis - foyer", "type": "ceremony", "group": "bride,groom", "agenda": "private vows", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "bridesmaid_peishang", "pic2": "bridesmaid_shulin"}, {"date": "2026-07-05", "start": "11:45", "end": "12:30", "venue": "St Regis - bridal suite", "type": "makeup", "group": "bride,groom", "agenda": "touchup makeup", "logistics": "", "notes": "", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "11:45", "end": "12:15", "venue": "St Regis - banquet", "type": "admin", "group": "", "agenda": "guests to settle down in banquet", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "12:15", "end": "12:30", "venue": "St Regis - foyer", "type": "setup", "group": "groomsman_sly groomsman_mao groomsman_wayne bridesmaid_hweiye", "agenda": "keep valuables from reception table in bridal room", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_sly", "pic2": "groomsman_mao"}, {"date": "2026-07-05", "start": "12:15", "end": "12:30", "venue": "St Regis - banquet", "type": "ceremony", "group": "", "agenda": "video montage + buffer", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "12:30", "end": "12:40", "venue": "St Regis - banquet", "type": "ceremony", "group": "bride,bridesmaid,groom,groomsman", "agenda": "1st march in + cake cutting", "logistics": "balloon popping", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "12:40", "end": "13:00", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#1 appetiser", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "13:00", "end": "13:20", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#2 soup", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "13:00", "end": "14:00", "venue": "St Regis - bridal suite", "type": "makeup", "group": "bride,groom", "agenda": "outfit change + makeup", "logistics": "", "notes": "", "vendor": "Hana Han", "vendor_contact": "89238005", "pic1": "bridesmaid_trina", "pic2": ""}, {"date": "2026-07-05", "start": "13:20", "end": "13:40", "venue": "St Regis - banquet", "type": "ceremony", "group": "", "agenda": "bingo", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "13:20", "end": "13:40", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#3 vegatable", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "13:40", "end": "14:00", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#4 fish", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "14:00", "end": "14:20", "venue": "St Regis - banquet", "type": "ceremony", "group": "bride,bridesmaid,groom,groomsman", "agenda": "2nd march in + yum seng + short speech", "logistics": "bubble gun", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "14:20", "end": "15:30", "venue": "St Regis - banquet", "type": "ceremony", "group": "bride,bridesmaid,groom,groomsman", "agenda": "phototaking at the stage", "logistics": "phototaking sequence", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "14:00", "end": "14:20", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#5 chicken", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "14:20", "end": "14:40", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#6 noodle", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "14:40", "end": "15:00", "venue": "St Regis - banquet", "type": "food", "group": "", "agenda": "#7 dessert", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "groomsman_desmond", "pic2": ""}, {"date": "2026-07-05", "start": "15:30", "end": "16:00", "venue": "St Regis - banquet", "type": "admin", "group": "", "agenda": "clear venue", "logistics": "", "notes": "", "vendor": "", "vendor_contact": "", "pic1": "", "pic2": ""}];
+
+// --- Normalize people from group field ---
+function parsePeople(group) {
+  if (!group) return [];
+  return group.split(/[,\n]/).map(s => s.trim()).filter(Boolean);
+}
+
+// Hardcoded ordered lists for the 3 filter rows
+const BRIDE_SIDE = ['bride', 'bridesmaid_trina', 'bridesmaid_peishang', 'bridesmaid_hweiye', 'bridesmaid_shulin'];
+const GROOM_SIDE = ['groom', 'groomsman_sly', 'groomsman_wayne', 'groomsman_mj', 'groomsman_mao', 'groomsman_desmond'];
+const VENDORS = ['Ann Chong', 'Balloon - TBC', 'Emcee Jia Yang', 'Hana Han', 'JM Floral', 'Tan Peng Yam', 'Toast Box', 'Valda (Maestro Makeup)', 'Victoria', 'Vince'];
+
+const TYPE_LABELS = {
+  prep: 'Prep', makeup: 'Makeup', travel: 'Travel', setup: 'Setup',
+  ceremony: 'Ceremony', photo: 'Photo', admin: 'Admin',
+  'check-in': 'Check-in', gatecrash: 'Gatecrash', station: 'Station', food: 'Food'
+};
+const TYPE_EMOJIS = {
+  prep: '📦', makeup: '💄', travel: '🚗', setup: '🔧',
+  ceremony: '💍', photo: '📸', admin: '📋', 'check-in': '🏨', gatecrash: '🎉', station: '📌', food: '🍽️'
+};
+
+let activeDay = 'all';
+let activeTypes = new Set();
+let activePerson = null;
+let activeLocation = null;
+let searchQ = '';
+
+// Build type filter buttons
+const typeFilterEl = document.getElementById('type-dd-panel');
+Object.entries(TYPE_LABELS).forEach(([k, v]) => {
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn';
+  btn.textContent = `${TYPE_EMOJIS[k]} ${v}`;
+  btn.dataset.type = k;
+  btn.onclick = () => toggleType(k, btn);
+  typeFilterEl.appendChild(btn);
+});
+
+// Build person filter buttons into 3 rows
+function buildFilterRow(containerId, items, labelFn) {
+  const el = document.getElementById(containerId);
+  items.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.textContent = labelFn(p);
+    btn.dataset.person = p;
+    btn.onclick = () => setPerson(p, btn);
+    el.appendChild(btn);
+  });
+}
+buildFilterRow('filters-bride', BRIDE_SIDE, p => formatName(p));
+buildFilterRow('filters-groom', GROOM_SIDE, p => formatName(p));
+buildFilterRow('filters-vendor', VENDORS, v => v);
+
+function formatName(s) {
+  if (!s) return '';
+  return s.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function setDay(d) {
+  activeDay = d;
+  document.querySelectorAll('.day-tab').forEach((btn, i) => {
+    btn.classList.toggle('active', ['all','2026-07-04','2026-07-05'][i] === d);
+  });
+  applyFilters();
+}
+
+function setLocation(loc) {
+  activeLocation = (activeLocation === loc) ? null : loc;
+  document.getElementById('loc-cck').classList.toggle('active', activeLocation === 'cck');
+  document.getElementById('loc-stregis').classList.toggle('active', activeLocation === 'stregis');
+  applyFilters();
+}
+
+function toggleType(k, btn) {
+  if (activeTypes.has(k)) { activeTypes.delete(k); btn.classList.remove('active'); }
+  else { activeTypes.add(k); btn.classList.add('active'); }
+  updateTypeBadge();
+  applyFilters();
+}
+
+function updateTypeBadge() {
+  const n = activeTypes.size;
+  const countEl = document.getElementById('type-dd-count');
+  const ddBtn   = document.getElementById('type-dd-btn');
+  countEl.textContent = n;
+  countEl.classList.toggle('visible', n > 0);
+  ddBtn.classList.toggle('has-active', n > 0);
+}
+
+function toggleTypeDD(e) {
+  e.stopPropagation();
+  document.getElementById('type-dd-panel').classList.toggle('open');
+}
+
+document.addEventListener('click', () => {
+  document.getElementById('type-dd-panel').classList.remove('open');
+});
+
+function setPerson(p, btn) {
+  const allBtns = document.querySelectorAll('#filters-bride .filter-btn, #filters-groom .filter-btn, #filters-vendor .filter-btn');
+  if (activePerson === p) {
+    activePerson = null;
+    allBtns.forEach(b => b.classList.remove('active','person'));
+  } else {
+    activePerson = p;
+    allBtns.forEach(b => b.classList.remove('active','person'));
+    btn.classList.add('active','person');
+  }
+  applyFilters();
+}
+
+// e.g. bridesmaid_trina → ['bridesmaid'], groomsman_sly → ['groomsman'], groom_mummy → ['groom']
+function parentGroups(p) {
+  if (p.startsWith('bridesmaid_')) return ['bridesmaid'];
+  if (p.startsWith('groomsman_')) return ['groomsman'];
+  return [];
+}
+
+function rowMatchesPerson(r, p) {
+  if (!p) return true;
+  const people = parsePeople(r.group);
+  if (people.includes(p)) return true;
+  if (r.pic1 === p || r.pic2 === p) return true;
+  if (r.vendor === p) return true;
+  // Check if any parent group is in this row's group list
+  for (const parent of parentGroups(p)) {
+    if (people.includes(parent)) return true;
+  }
+  return false;
+}
+
+function applyFilters() {
+  searchQ = document.getElementById('search-box').value.toLowerCase();
+  const filtered = DATA.filter(r => {
+    if (activeDay !== 'all' && r.date !== activeDay) return false;
+    if (activeTypes.size > 0 && !activeTypes.has(r.type)) return false;
+    if (activePerson && !rowMatchesPerson(r, activePerson)) return false;
+    if (activeLocation === 'cck' && r.venue.toLowerCase() !== 'cck') return false;
+    if (activeLocation === 'stregis' && !r.venue.toLowerCase().startsWith('st regis')) return false;
+    if (searchQ) {
+      const hay = [r.agenda, r.venue, r.group, r.vendor, r.notes, r.logistics].join(' ').toLowerCase();
+      if (!hay.includes(searchQ)) return false;
+    }
+    return true;
+  });
+  renderTimeline(filtered);
+}
+
+function durMin(r) {
+  if (!r.start || !r.end) return 30;
+  const [sh, sm] = r.start.split(':').map(Number);
+  const [eh, em] = r.end.split(':').map(Number);
+  const d = (eh * 60 + em) - (sh * 60 + sm);
+  return d > 0 ? d : 30;
+}
+
+function renderTimeline(rows) {
+  const wrap = document.getElementById('timeline');
+
+  // Group by date
+  const byDate = {};
+  rows.forEach(r => {
+    if (!byDate[r.date]) byDate[r.date] = [];
+    byDate[r.date].push(r);
+  });
+
+  const dayNames = { '2026-07-04': 'Day before — Sunday, 4 July', '2026-07-05': 'Wedding Day — Sunday, 5 July' };
+
+  let html = '';
+  const sortedDates = Object.keys(byDate).sort();
+
+  if (sortedDates.length === 0) {
+    html = `<div class="empty-state"><div class="icon">🔍</div><p>No events match your filters.</p></div>`;
+  }
+
+  sortedDates.forEach(date => {
+    const dayRows = byDate[date];
+    // Sort by start time
+    dayRows.sort((a,b) => (a.start||'99:99').localeCompare(b.start||'99:99'));
+
+    html += `<div class="day-section">
+      <div class="day-heading">
+        <div class="day-label">${dayNames[date] || date}</div>
+        <div class="day-date">${date}</div>
+        <div class="day-line"></div>
+      </div>`;
+
+    dayRows.forEach((r, idx) => {
+      const hasDetails = r.logistics || r.notes || r.vendor;
+      const detailId = `detail-${date}-${idx}`;
+
+      const people = parsePeople(r.group);
+      const groupTags = people.map(p =>
+        `<span class="group-tag${activePerson === p ? ' highlight' : ''}">${formatName(p)}</span>`
+      ).join('');
+
+      const picTags = [r.pic1, r.pic2].filter(Boolean).map(p =>
+        `<span class="meta-item"><span class="meta-icon">👤</span> PIC: ${formatName(p)}</span>`
+      ).join('');
+
+      const vendorBlock = r.vendor ? `
+        <div class="vendor-block">
+          <span>🏢</span>
+          <div>
+            <div class="vendor-name">${r.vendor}</div>
+            ${r.vendor_contact ? `<div class="vendor-contact"><a href="tel:+65${r.vendor_contact}">📞 ${r.vendor_contact}</a></div>` : ''}
+          </div>
+        </div>` : '';
+
+      const logisticsBlock = r.logistics ? `
+        <div class="detail-section">
+          <div class="detail-label">Logistics / Checklist</div>
+          <div class="detail-text">${escHtml(r.logistics)}</div>
+        </div>` : '';
+
+      const notesBlock = r.notes ? `
+        <div class="detail-section">
+          <div class="detail-label">Notes</div>
+          <div class="detail-text">${escHtml(r.notes)}</div>
+        </div>` : '';
+
+      html += `
+        <div class="timeline-item" style="min-height:${Math.max(Math.round(durMin(r)*1.4),44)}px">
+          <div class="time-col">
+            ${r.start ? `<div class="time-start">${r.start}</div><div class="time-end">– ${r.end}</div>` : '<div class="time-start" style="color:#ccc">–</div>'}
+          </div>
+          <div class="content-col">
+            <div class="event-card card-${r.type}">
+              <div class="card-top">
+                <div class="card-agenda">${escHtml(r.agenda)}</div>
+                <div class="card-badges">
+                  <span class="badge badge-type">${TYPE_EMOJIS[r.type]||''} ${TYPE_LABELS[r.type]||r.type}</span>
+                  ${r.venue ? `<span class="badge badge-venue">📍 ${r.venue}</span>` : ''}
+                </div>
+              </div>
+              ${groupTags ? `<div class="card-groups">${groupTags}</div>` : ''}
+              ${picTags || vendorBlock ? `<div class="card-meta">${picTags}</div>` : ''}
+              ${vendorBlock}
+              ${hasDetails ? `
+                <button class="expand-btn" onclick="toggleDetail('${detailId}', this)">▸ Show details</button>
+                <div class="card-details" id="${detailId}">
+                  ${logisticsBlock}
+                  ${notesBlock}
+                </div>` : ''}
+            </div>
+          </div>
+        </div>`;
+    });
+
+    html += `</div>`;
+  });
+
+  wrap.innerHTML = html;
+
+  // Stats
+  document.getElementById('stats-text').innerHTML =
+    `Showing <span class="stats-count">${rows.length}</span> of ${DATA.length} events` +
+    (activePerson ? ` · Filtered: <strong>${formatName(activePerson)}</strong>` : '');
+}
+
+function toggleDetail(id, btn) {
+  const el = document.getElementById(id);
+  const open = el.classList.toggle('open');
+  btn.textContent = open ? '▾ Hide details' : '▸ Show details';
+}
+
+function escHtml(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Initial render
+applyFilters();
+</script>
+</body>
+</html>

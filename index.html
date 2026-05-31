@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jun Hong & Qiu Yi · 5 July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+  :root {
+    --gold:       #b8986a;
+    --gold-light: #d4b896;
+    --gold-pale:  #f5ede0;
+    --dark:       #1a1510;
+    --mid:        #3d3020;
+    --text:       #2c2416;
+    --muted:      #8a7a65;
+    --bg:         #faf7f2;
+    --white:      #ffffff;
+    --border:     #e8ddd0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', -apple-system, 'Helvetica Neue', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--dark);
+    padding: 36px 40px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(184,152,106,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-ornament {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    opacity: 0.9;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+  .header h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .header-sub {
+    font-size: 12px;
+    color: var(--gold-light);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    font-weight: 300;
+  }
+  .header-line {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 14px auto 0;
+    opacity: 0.45;
+  }
+
+  /* ── Main layout ── */
+  .main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+  }
+
+  .intro {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .intro-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--mid);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .intro-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── Cards ── */
+  .cards {
+    display: grid;
+    gap: 16px;
+  }
+
+  .card {
+    display: block;
+    text-decoration: none;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 4px 24px rgba(26,21,16,0.08);
+    transform: translateY(-1px);
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--dark);
+    letter-spacing: 0.3px;
+    margin-bottom: 6px;
+  }
+  .card-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .card-arrow {
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 18px;
+    opacity: 0.5;
+    transition: opacity 0.2s, right 0.2s;
+  }
+  .card:hover .card-arrow { opacity: 1; right: 24px; }
+
+  /* ── Divider ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 36px 0;
+    color: var(--border);
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .divider-diamond {
+    color: var(--gold);
+    font-size: 10px;
+    opacity: 0.6;
+  }
+
+  /* ── Venue note ── */
+  .venue-note {
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 480px) {
+    .header { padding: 28px 20px 24px; }
+    .main { padding: 32px 16px 48px; }
+    .card { padding: 22px 44px 22px 24px; }
+    .intro { margin-bottom: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-ornament">Wedding Day Programme</div>
+  <h1><em>Jun Hong</em> &amp; <em>Qiu Yi</em></h1>
+  <div class="header-sub">5 July 2026 &nbsp;·&nbsp; St Regis Singapore</div>
+  <div class="header-line"></div>
+</div>
+
+<div class="main">
+
+  <div class="intro">
+    <div class="intro-title">Day-of Schedule</div>
+    <div class="intro-text">Select a view below to see the full wedding programme.</div>
+  </div>
+
+  <div class="cards">
+
+    <a href="overview.html" class="card">
+      <span class="card-icon">🗓️</span>
+      <div class="card-title">Overview</div>
+      <div class="card-desc">Swimlane view of the full day — who's doing what and when, laid out side by side.</div>
+      <span class="card-arrow">›</span>
+    </a>
+
+    <a href="timeline.html" class="card">
+      <span class="card-icon">📋</span>
+      <div class="card-title">Detailed Timeline</div>
+      <div class="card-desc">Full rundown with logistics, vendor contacts, PICs and notes. Filter by person, venue or event type.</div>
+      <span class="card-arrow">›</span>
+    </a>
+
+  </div>
+
+  <div class="divider"><span class="divider-diamond">◆</span></div>
+
+  <div class="venue-note">St Regis Hotel, Singapore</div>
+
+</div>
+
+</body>
+</html>
